@@ -1,13 +1,15 @@
 import java.util.*;
-import java.lang.*;
-import javafx.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         //input
         int N = scanner.nextInt();
-        long N = scanner.nextLong();
+        int M = scanner.nextInt();
+        int[] K = new int[M];
+        for (int i = 0; i < M; i++) {
+            K[i] = scanner.nextInt();
+        }
         String S = scanner.nextLine();
         String S = scanner.next();
         int[] A = new int[N];
