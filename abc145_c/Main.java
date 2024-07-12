@@ -7,35 +7,35 @@ public class Main {
 
         /* input */
         int N = scanner.nextInt();
-        long N = scanner.nextLong();
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
+        int[][] A = new int[N][2];
         for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+            A[i][0] = scanner.nextInt();
+            A[i][1] = scanner.nextInt();
         }
 
         /* algorithm */
-        int res = 0;
+        double res = 0;
         int cnt = 0;
-        int sum = 0;
+        int[] array = new int[N];
         for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+            array[i] = i;
         }
-
 
         /* next permutation loop snippet */
         do {
-            for (int a : A) {
-                System.out.print(a);
-                System.out.print(' ');
+            cnt++;
+            for (int i = 1; i < array.length; i++) {
+                res += Math.sqrt(
+                    Math.pow(A[array[i-1]][0] - A[array[i]][0], 2) +
+                    Math.pow(A[array[i-1]][1] - A[array[i]][1], 2)
+                );
             }
-            System.out.println();
-        } while (next_permutation(A, 0, A.length));
+        } while (next_permutation(array, 0, array.length));
 
         /* output */
+        res /= cnt;
+        // System.out.printf("%.10f\n" ,res);
         System.out.println(res);
-        System.out.printf("%.10f\n" ,res);
     }
 
     /* next permutation method */

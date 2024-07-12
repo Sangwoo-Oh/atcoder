@@ -6,26 +6,35 @@ public class Main {
         //input
         int N = scanner.nextInt();
         int M = scanner.nextInt();
-        int[] K = new int[M];
+        int[][] K = new int[M][];
         for (int i = 0; i < M; i++) {
-            K[i] = scanner.nextInt();
+            K[i] = new int[scanner.nextInt()];
+            for (int j = 0; j < K[i].length; j++) {
+                K[i][j] = scanner.nextInt() - 1;
+            }
         }
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+        int[] P = new int[M];
+        for (int i = 0; i < M; i++) {
+            P[i] = scanner.nextInt();
         }
 
         //algorithm
         int res = 0;
-        // int cnt = 0;
-        // int sum = 0;
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+        for (int bit = 0; bit < (1 << N); bit++) {
+            boolean all = true;
+            for (int i = 0; i < M; i++) {
+                int sum = 0;
+                for (int j = 0; j < K[i].length; j++) {
+                    if ((bit >> K[i][j] & 1)== 1) {
+                        sum += 1;
+                    }
+                }
+                if (sum % 2 != P[i]) {
+                    all = false;
+                }
+            }
+            if (all) res++;
         }
-
-
 
         System.out.println(res);
     }

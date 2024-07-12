@@ -7,35 +7,39 @@ public class Main {
 
         /* input */
         int N = scanner.nextInt();
-        long N = scanner.nextLong();
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+        int M = scanner.nextInt();
+
+        int[][] ab = new int[M][2];
+        for (int i = 0; i < M; i++) {
+            ab[i][0] = scanner.nextInt();
+            ab[i][1] = scanner.nextInt();
         }
 
         /* algorithm */
         int res = 0;
-        int cnt = 0;
-        int sum = 0;
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
-        }
-
+        int[] array = new int[N];
+        for (int i = 0; i < N; i++) array[i] = i + 1;
 
         /* next permutation loop snippet */
         do {
-            for (int a : A) {
-                System.out.print(a);
-                System.out.print(' ');
+            if (array[0] != 1) continue;
+            int path = 0;
+            for (int i = 0; i < N-1; i++) {
+                for (int j = 0; j < M; j++) {
+                    if (array[i] == ab[j][0] && array[i+1] == ab[j][1]) {
+                        path++;
+                    } else if (array[i+1] == ab[j][0] && array[i] == ab[j][1]) {
+                        path++;
+                    }
+                }
             }
-            System.out.println();
-        } while (next_permutation(A, 0, A.length));
+            if (path==N-1) {
+                res++;
+            }
+        } while (next_permutation(array, 0, array.length));
 
         /* output */
         System.out.println(res);
-        System.out.printf("%.10f\n" ,res);
     }
 
     /* next permutation method */

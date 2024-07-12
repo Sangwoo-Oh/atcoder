@@ -7,35 +7,48 @@ public class Main {
 
         /* input */
         int N = scanner.nextInt();
-        long N = scanner.nextLong();
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
+        int[] P = new int[N];
+        int[] Q = new int[N];
         for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+            P[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < N; i++) {
+            Q[i] = scanner.nextInt();
         }
 
         /* algorithm */
         int res = 0;
-        int cnt = 0;
-        int sum = 0;
+        int[] A = new int[N];
         for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+            A[i] = i + 1;
         }
 
-
+        int order = 0;
+        int a = 0;
+        int b = 0;
         /* next permutation loop snippet */
         do {
-            for (int a : A) {
-                System.out.print(a);
-                System.out.print(' ');
+            boolean isSame = true;
+            for (int i = 0; i < N; i++) {
+                if (P[i] != A[i]) isSame = false;
             }
-            System.out.println();
+            if (isSame) {
+                a = order;
+            }
+
+            isSame = true;
+            for (int i = 0; i < N; i++) {
+                if (Q[i] != A[i]) isSame = false;
+            }
+            if (isSame) {
+                b = order;
+            }
+            order += 1;
         } while (next_permutation(A, 0, A.length));
 
         /* output */
+        res = Math.abs(a-b);
         System.out.println(res);
-        System.out.printf("%.10f\n" ,res);
     }
 
     /* next permutation method */
