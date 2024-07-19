@@ -6,38 +6,29 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         /* input */
-        int N = scanner.nextInt();
-        long N = scanner.nextLong();
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
-        }
+        int n = scanner.nextInt();
+        long[] a = new long[n];
+        for (int i = 0; i < n; i++) a[i] = scanner.nextLong();
 
-        /* algorithm */
-        int res = 0;
-        int cnt = 0;
-        int sum = 0;
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
-        }
+        Stack<Long> stack = new Stack<>();
 
-        /* array sort */
-        // Arrays.sort(Card, (a,b)->Integer.compare(a[1], b[1]));
-
-        /* next permutation loop snippet */
-        do {
-            for (int a : A) {
-                System.out.print(a);
-                System.out.print(' ');
+        for (int i = 0; i < n; i++) {
+            stack.push(a[i]);
+            while (stack.size() > 1) {
+                long top1 = stack.pop();
+                long top2 = stack.pop();
+                if (top1 != top2) {
+                    stack.push(top2);
+                    stack.push(top1);
+                    break;
+                } else {
+                    stack.push(top1 + (long)1);
+                }
             }
-            System.out.println();
-        } while (next_permutation(A, 0, A.length));
+        }
 
         /* output */
-        System.out.println(res);
-        System.out.printf("%.10f\n" ,res);
+        System.out.println(stack.size());
     }
 
     /* next permutation method */

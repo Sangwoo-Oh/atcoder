@@ -33,35 +33,44 @@ public class Main {
         a = new long[n];
         for (int i = 0; i < n; i++) a[i] = scanner.nextLong();
 
-        /* 隣接辺行列 adjacent edges matrix */
+        /* 隣接辺行列 adjacent edges */
         List<List<Edge>> edges = new ArrayList<>();
-        for (int i = 0; i < n; i++) edges.add(new ArrayList<Edge>());
+        for (int i = 0; i < n; i++) {
+            edges.add(new ArrayList<Edge>());
+        }
+
+
         for (int i = 0; i < m; i++) {
-            int u = scanner.nextInt(); u--;
-            int v = scanner.nextInt(); v--;
-            long b = scanner.nextLong();
+            int u,v;
+            long b;
+            u = scanner.nextInt(); u--;
+            v = scanner.nextInt(); v--;
+            b = scanner.nextLong();
             edges.get(u).add(new Edge(v, b+a[v]));
             edges.get(v).add(new Edge(u, b+a[u])); /** because of undirected graph */
         }
 
-        /* dijkstra algorithm */
-        /** each distances from starting point, set all to INF */
-        long[] distance = new long[n]; Arrays.fill(distance, INF);
+
+
+        /* algorithm */
+
+        long[] distance = new long[n]; Arrays.fill(distance, INF); /** set all to INF */
+
         distance[0] = a[0]; /** settle start point */
         Queue<Edge> q = new PriorityQueue<Edge>();
-        q.add(new Edge(0, a[0])); /** add start point */
+        q.add(new Edge(0, a[0])); /** settle start point */
 
         while (!q.isEmpty()) {
-            Edge e = q.poll(); /** get minimum */
-
-            /** 訪問済みNodeのコストがすでに更新されていたらスキップ */
-            if (distance[e.target] < e.cost) continue;
+            Edge e = q.poll();
+            if (distance[e.target] < e.cost) {
+                continue;
+            }
 
             for (Edge v : edges.get(e.target)) {
-                long new_distance = distance[e.target] + v.cost;
-                if (distance[v.target] > new_distance) {
-                    distance[v.target] = new_distance;
-                    q.add(new Edge(v.target, new_distance));
+                long nd = distance[e.target] + v.cost;
+                if (distance[v.target] > nd) {
+                    distance[v.target] = nd;
+                    q.add(new Edge(v.target, nd));
                 }
             }
         }

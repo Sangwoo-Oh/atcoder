@@ -2,42 +2,33 @@ import java.util.*;
 import java.lang.*;
 
 public class Main {
+    static String S;
+    static String T;
+    public static boolean judge(String S, String T) {
+        S = S.toUpperCase();
+        int j = 0;
+        for (int i = 0; i < S.length(); i++) {
+            if (S.charAt(i) == T.charAt(j)) {
+                j++;
+                if (j==3) return true;
+            }
+        }
+        if (j==2 && 'X' == T.charAt(j)) {
+            return true;
+        }
+        return false;
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         /* input */
-        int N = scanner.nextInt();
-        long N = scanner.nextLong();
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
-        }
+        S = scanner.nextLine();
+        T = scanner.nextLine();
 
-        /* algorithm */
-        int res = 0;
-        int cnt = 0;
-        int sum = 0;
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
-        }
-
-        /* array sort */
-        // Arrays.sort(Card, (a,b)->Integer.compare(a[1], b[1]));
-
-        /* next permutation loop snippet */
-        do {
-            for (int a : A) {
-                System.out.print(a);
-                System.out.print(' ');
-            }
-            System.out.println();
-        } while (next_permutation(A, 0, A.length));
 
         /* output */
-        System.out.println(res);
-        System.out.printf("%.10f\n" ,res);
+        if (judge(S,T)) System.out.println("Yes");
+        else System.out.println("No");
     }
 
     /* next permutation method */

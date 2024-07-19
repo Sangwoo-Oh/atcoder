@@ -7,37 +7,30 @@ public class Main {
 
         /* input */
         int N = scanner.nextInt();
-        long N = scanner.nextLong();
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
+        int[][] Card = new int[N][3];
         for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+            Card[i][0] = scanner.nextInt();
+            Card[i][1] = scanner.nextInt();
+            Card[i][2] = i + 1;
         }
 
         /* algorithm */
-        int res = 0;
-        int cnt = 0;
-        int sum = 0;
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+        int max = 0;
+        ArrayList<Integer> list = new ArrayList<>();
+        Arrays.sort(Card, (a,b)->Integer.compare(a[1], b[1]));
+        for(int i = 0;i < N;i++){
+            if(max <= Card[i][0]){
+                list.add(Card[i][2]);
+                max = Card[i][0];
+            }
         }
 
-        /* array sort */
-        // Arrays.sort(Card, (a,b)->Integer.compare(a[1], b[1]));
-
-        /* next permutation loop snippet */
-        do {
-            for (int a : A) {
-                System.out.print(a);
-                System.out.print(' ');
-            }
-            System.out.println();
-        } while (next_permutation(A, 0, A.length));
-
         /* output */
-        System.out.println(res);
-        System.out.printf("%.10f\n" ,res);
+        list.sort(null);
+        System.out.println(list.size());
+        for(int i:list){
+            System.out.print(i+" ");
+        }
     }
 
     /* next permutation method */

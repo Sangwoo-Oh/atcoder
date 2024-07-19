@@ -6,38 +6,26 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         /* input */
-        int N = scanner.nextInt();
-        long N = scanner.nextLong();
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+        int[][] xy = new int[3][2];
+        for (int i = 0; i < 3; i++) {
+            xy[i][0] = scanner.nextInt();
+            xy[i][1] = scanner.nextInt();
         }
 
-        /* algorithm */
-        int res = 0;
-        int cnt = 0;
-        int sum = 0;
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+        double ab = Math.pow(xy[0][0] - xy[1][0],2) + Math.pow(xy[0][1] - xy[1][1],2);
+        double bc = Math.pow(xy[1][0] - xy[2][0],2) + Math.pow(xy[1][1] - xy[2][1],2);
+        double ca = Math.pow(xy[2][0] - xy[0][0],2) + Math.pow(xy[2][1] - xy[0][1],2);
+
+        boolean res = false;
+        if (ab >= bc && ab >= ca) {
+            res = ab == bc + ca;
+        } else if (bc >= ab && bc >= ca) {
+            res = bc == ab + ca;
+        } else {
+            res = ca == ab + bc;
         }
 
-        /* array sort */
-        // Arrays.sort(Card, (a,b)->Integer.compare(a[1], b[1]));
-
-        /* next permutation loop snippet */
-        do {
-            for (int a : A) {
-                System.out.print(a);
-                System.out.print(' ');
-            }
-            System.out.println();
-        } while (next_permutation(A, 0, A.length));
-
-        /* output */
-        System.out.println(res);
-        System.out.printf("%.10f\n" ,res);
+        System.out.println(res ? "Yes" : "No");
     }
 
     /* next permutation method */

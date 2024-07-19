@@ -7,37 +7,27 @@ public class Main {
 
         /* input */
         int N = scanner.nextInt();
-        long N = scanner.nextLong();
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
+        long[][] AB = new long[N][3];
+        int[] arr = new int[N];
         for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+            AB[i][0] = scanner.nextInt();
+            AB[i][1] = scanner.nextInt();
+            AB[i][2] = AB[i][1] - AB[i][0];
         }
 
         /* algorithm */
-        int res = 0;
-        int cnt = 0;
-        int sum = 0;
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
-        }
+
 
         /* array sort */
-        // Arrays.sort(Card, (a,b)->Integer.compare(a[1], b[1]));
-
-        /* next permutation loop snippet */
-        do {
-            for (int a : A) {
-                System.out.print(a);
-                System.out.print(' ');
-            }
-            System.out.println();
-        } while (next_permutation(A, 0, A.length));
+        Arrays.sort(AB, (a,b)->Long.compare(a[2], b[2]));
+        long res = 0;
+        for (int i = 0; i < N-1; i++) {
+            res += AB[i][0];
+        }
+        res += AB[N-1][1];
 
         /* output */
         System.out.println(res);
-        System.out.printf("%.10f\n" ,res);
     }
 
     /* next permutation method */

@@ -6,38 +6,29 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         /* input */
-        int N = scanner.nextInt();
-        long N = scanner.nextLong();
-        String S = scanner.nextLine();
-        String S = scanner.next();
-        int[] A = new int[N];
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
+        int n = scanner.nextInt();
+        int[] a = new int[n+1];
+        for (int i = 0; i < n; i++) {
+            a[i+1] = scanner.nextInt();
         }
 
-        /* algorithm */
-        int res = 0;
-        int cnt = 0;
-        int sum = 0;
-        for (int i = 0; i < N; i++) {
-            A[i] = scanner.nextInt();
-        }
+        ArrayList<int[]> ans = new ArrayList<>();
 
-        /* array sort */
-        // Arrays.sort(Card, (a,b)->Integer.compare(a[1], b[1]));
-
-        /* next permutation loop snippet */
-        do {
-            for (int a : A) {
-                System.out.print(a);
-                System.out.print(' ');
+        for (int i = 1; i <= n; i++) {
+            while (a[i] != i) {
+                int j = a[i];
+                ans.add(new int[]{i, j});
+                int tmp = a[i];
+                a[i] = a[j];
+                a[j] = tmp;
             }
-            System.out.println();
-        } while (next_permutation(A, 0, A.length));
+        }
 
         /* output */
-        System.out.println(res);
-        System.out.printf("%.10f\n" ,res);
+        System.out.println(ans.size());
+        for (int[] item : ans) {
+            System.out.println(item[0] + " " + item[1]);
+        }
     }
 
     /* next permutation method */
