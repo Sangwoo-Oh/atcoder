@@ -107,5 +107,19 @@ public class Main {
         return false;
     }
 
+    static public int lower_bound(long x, long[] arr) {
+        int left = -1;
+        int right = arr.length;
 
+        while (right-left>1) {
+            int m = (left + right) / 2;
+            if (arr[m] >= x) {
+                right = m;
+            } else {
+                left = m;
+            }
+        }
+
+        return right;
+    }
 }
