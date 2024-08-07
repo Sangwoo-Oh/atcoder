@@ -16,12 +16,17 @@ public class Main {
         int MAX_V = 100001;
         long[][] dp = new long[n+1][MAX_V];
 
-        for (int i=0; i<=n; i++) for (int j=0; j<MAX_V; j++) dp[i][j] = Long.MAX_VALUE-10000;
+        for (int i=0; i<=n; i++) for (int j=0; j<MAX_V; j++) dp[i][j] = Long.MAX_VALUE;
         dp[0][0] = 0;
 
         for (int i=0; i<n; i++) {
             for (int j=0; j<MAX_V; j++) {
-                if (j-wv[i][1] >= 0) { dp[i+1][j] = Math.min(dp[i][j], dp[i][j-(int)wv[i][1]] + wv[i][0]);
+                if (j-wv[i][1] >= 0) {
+                    if (dp[i][j-(int)wv[i][1]] != Long.MAX_VALUE) {
+                        dp[i+1][j] = Math.min(dp[i][j], dp[i][j-(int)wv[i][1]] + wv[i][0]);
+                    } else {
+                        dp[i+1][j] = dp[i][j];
+                    }
                 } else dp[i+1][j] = dp[i][j];
             }
         }
