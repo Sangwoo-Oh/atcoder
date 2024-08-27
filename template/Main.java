@@ -8,6 +8,5 @@ public class Main {
         /* input */
         int n = scanner.nextInt();
         String s = scanner.next();
-
     }
 }
