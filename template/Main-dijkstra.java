@@ -50,8 +50,6 @@ public class Main {
             edges.get(v).add(new Edge(u, b+a[u])); /** because of undirected graph */
         }
 
-
-
         /* algorithm */
 
         long[] distance = new long[n]; Arrays.fill(distance, INF); /** set all to INF */
@@ -62,9 +60,7 @@ public class Main {
 
         while (!q.isEmpty()) {
             Edge e = q.poll();
-            if (distance[e.target] < e.cost) {
-                continue;
-            }
+            if (distance[e.target] < e.cost) continue; // skip if already updated
 
             for (Edge v : edges.get(e.target)) {
                 long nd = distance[e.target] + v.cost;
