@@ -1,28 +1,41 @@
 import java.lang.*;
 import java.util.*;
 
-class V {
+class Vector {
     int x, y;
-    public V(int x, int y) {
+    public Vector(int x, int y) {
         this.x = x;
         this.y = y;
     }
-    public V subtract(V other) {
-        return new V(this.x - other.x, this.y - other.y);
+
+    public Vector subtract(Vector other) {
+        return new Vector(this.x - other.x, this.y - other.y);
     }
 
-    // cross product
-    public int cross(V v) {
+    public Vector add(Vector other) {
+        return new Vector(this.x + other.x, this.y + other.y);
+    }
+
+	public int dot(Vector other) {
+		return this.x*other.x + this.y*other.y;
+	}
+
+    public int cross(Vector v) {
         return this.x*v.y - this.y*v.x;
     }
-    // counter clockwise: 1, clockwise: -1, colinear: 0
-    public int ccw(V v) {
+
+    public int ccw(Vector v) {
         int area = this.cross(v);
         if (area>0) return 1;
         if (area<0) return -1;
         return 0;
     }
+
+	public String toString() {
+		return "("+this.x+", "+this.y+")";
+	}
 }
+
 
 public class Main {
     public static void main(String[] args) {
