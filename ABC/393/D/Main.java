@@ -1,15 +1,6 @@
 import java.lang.*;
 import java.util.*;
 
-class Edge {
-    int to;
-    int cost;
-    Edge(int to, int cost) {
-        this.to = to;
-        this.cost = cost;
-    }
-}
-
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -18,11 +9,20 @@ public class Main {
         int n = scanner.nextInt();
         String s = scanner.next();
 
-        ArrayList<int[]> graph = new ArrayList<>();
-        int prev = -1;
+        ArrayList<Integer> p = new ArrayList<>();
         for (int i=0; i<n; i++) {
-            if (s.charAt(i) == '1') {
-            }
+            if (s.charAt(i) == '1') p.add(i);
         }
+        int k = p.size();
+        for (int i=0; i<k; i++) {
+            p.set(i, p.get(i)-i);
+        }
+
+        int med = p.get(k/2);
+        long ans = 0;
+        for (int i=0; i<k; i++) {
+            ans += Math.abs(med-p.get(i));
+        }
+        System.out.println(ans);
     }
 }
