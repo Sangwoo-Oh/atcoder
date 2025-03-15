@@ -4,35 +4,36 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         //input
-        int n = scanner.nextInt();
-        int w = scanner.nextInt();
+        int N = scanner.nextInt();
+        int W = scanner.nextInt();
 
-        long[][] wv = new long[n][2];
-        for (int i=0; i<n; i++) {
-            wv[i][0] = scanner.nextLong();
-            wv[i][1] = scanner.nextLong();
+        int[] w = new int[N];
+        int[] v = new int[N];
+
+        for (int i=0; i<N; i++) {
+            w[i] = scanner.nextInt();
+            v[i] = scanner.nextInt();
         }
 
-        int MAX_V = 100001;
-        long[][] dp = new long[n+1][MAX_V];
+        long[][] dp = new long[N+1][W+1];
 
-        for (int i=0; i<=n; i++) for (int j=0; j<MAX_V; j++) dp[i][j] = Long.MAX_VALUE;
-        dp[0][0] = 0;
+        // wが馬鹿でかいことによって、そのまま配列で表現しようとすると、アウトオブメモリーとなる
+        // 言い換えが必要
 
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<MAX_V; j++) {
-                if (j-wv[i][1] >= 0) {
-                    if (dp[i][j-(int)wv[i][1]] != Long.MAX_VALUE) {
-                        dp[i+1][j] = Math.min(dp[i][j], dp[i][j-(int)wv[i][1]] + wv[i][0]);
-                    } else {
-                        dp[i+1][j] = dp[i][j];
-                    }
-                } else dp[i+1][j] = dp[i][j];
+        for (int i=0; i<N; i++) {
+            for (int j=0; j<W; j++) {
+                // i番目を選ばない場合
+                dp[i+1][j+1] = dp[i][j+1];
+                // i番目を選ぶ場合
+                if (j + 1 >= w[i]) {
+                    // System.out.println(dp[i+1][j+1] +" , "+ dp[i][j + 1-w[i]] + v[i]);
+                    dp[i+1][j+1] = Math.max(dp[i+1][j+1], dp[i][j + 1-w[i]]+v[i]);
+                }
             }
+            // System.out.println(Arrays.toString(dp[i+1]));
         }
 
-        int ans=100000;
-        while(dp[n][ans]>w)ans--;
-        System.out.println(ans);
+        System.out.println(dp[N][W]);
+
     }
 }
